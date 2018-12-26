@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -34,7 +34,7 @@ if ($@) {
     exit 1;
 }
 
-use OTRS::XML::Simple;
+use LIGERO::XML::Simple;
 use Getopt::Std;
 
 use base qw(Docbook::Base);
@@ -70,7 +70,7 @@ $Options{OutputLocation} = $Opts{m} . '/doc/' . $Options{Language} . '/' . $Outp
 $Options{FrameworkPath}  = $Opts{f} ? $Opts{f} : '';
 
 # create parser in / out object
-my $XMLObject = OTRS::XML::Simple->new();
+my $XMLObject = LIGERO::XML::Simple->new();
 
 # output
 print "+----------------------------------------------------------------------------+\n";
@@ -108,7 +108,7 @@ sub _Help {
     my %Param = @_;
 
     print "$Script - Generate module technical implementation chapter\n";
-    print "Copyright (C) 2001-2017 OTRS AG, http://otrs.com/\n";
+    print "Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/\n";
     print "usage: $Script -m <path to module> -l <language> (optional)"
         . " -o <Output filename> (optional) -f <path to reference framework> (optional)\n";
 

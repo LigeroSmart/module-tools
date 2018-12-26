@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -20,7 +20,7 @@
 
 =head1 NAME
 
-FillTestsystem.pl - script for adding testdata to a OTRS instance.
+FillTestsystem.pl - script for adding testdata to a LIGERO instance.
 
 =head1 SYNOPSIS
 

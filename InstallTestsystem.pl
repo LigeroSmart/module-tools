@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -59,12 +59,12 @@ if ( !$FredDir || !-e $FredDir ) {
 # remove possible slash at the end
 $InstallDir =~ s{ / \z }{}xms;
 
-# get OTRS major version number
-my $OTRSReleaseString = `cat $InstallDir/RELEASE`;
-my $OTRSMajorVersion  = '';
-if ( $OTRSReleaseString =~ m{ VERSION \s+ = \s+ (\d+) .* \z }xms ) {
-    $OTRSMajorVersion = $1;
-    print "Installing testsystem for OTRS version $OTRSMajorVersion.\n";
+# get LIGERO major version number
+my $LIGEROReleaseString = `cat $InstallDir/RELEASE`;
+my $LIGEROMajorVersion  = '';
+if ( $LIGEROReleaseString =~ m{ VERSION \s+ = \s+ (\d+) .* \z }xms ) {
+    $LIGEROMajorVersion = $1;
+    print "Installing testsystem for LIGERO version $LIGEROMajorVersion.\n";
 }
 
 # Configuration
@@ -78,16 +78,16 @@ my %Config = (
     # the path to your module tools directory, w/ leading and trailing slashes
     'ModuleToolsRoot' => '/ws/module-tools/',
 
-    # user name for mysql (should be the same that you usually use to install a local OTRS instance)
+    # user name for mysql (should be the same that you usually use to install a local LIGERO instance)
     'DatabaseUserName' => 'root',
 
     # password for your mysql user
     'DatabasePassword' => '',
 
-    'PermissionsOTRSUser'  => '_www',     # OTRS user
-    'PermissionsOTRSGroup' => '_www',     # OTRS group
-    'PermissionsWebUser'   => '_www',     # otrs-web user
-    'PermissionsWebGroup'  => '_www',     # otrs-web group
+    'PermissionsLIGEROUser'  => '_www',     # LIGERO user
+    'PermissionsLIGEROGroup' => '_www',     # LIGERO group
+    'PermissionsWebUser'   => '_www',     # ligero-web user
+    'PermissionsWebGroup'  => '_www',     # ligero-web group
     'PermissionAdminGroup' => 'admin',    # admin group
 
     # the apache config of the system you're going to install will be copied to this location
@@ -98,25 +98,25 @@ my %Config = (
 );
 
 # define some maintenance commands
-if ( $OTRSMajorVersion >= 5 ) {
+if ( $LIGEROMajorVersion >= 5 ) {
 
     if ( $Config{UseMacCommands} ) {
         $Config{RebuildConfigCommand}
-            = "su $Config{PermissionsOTRSUser} -c '$InstallDir/bin/otrs.Console.pl Maint::Config::Rebuild'";
+            = "su $Config{PermissionsLIGEROUser} -c '$InstallDir/bin/ligero.Console.pl Maint::Config::Rebuild'";
         $Config{DeleteCacheCommand}
-            = "su $Config{PermissionsOTRSUser} -c '$InstallDir/bin/otrs.Console.pl Maint::Cache::Delete'";
+            = "su $Config{PermissionsLIGEROUser} -c '$InstallDir/bin/ligero.Console.pl Maint::Cache::Delete'";
     }
     else {
-        $Config{RebuildConfigCommand} = "su -c '$InstallDir/bin/otrs.Console.pl Maint::Config::Rebuild' -s /bin/bash "
-            . $Config{PermissionsOTRSUser};
-        $Config{DeleteCacheCommand} = "su -c '$InstallDir/bin/otrs.Console.pl Maint::Cache::Delete' -s /bin/bash "
-            . $Config{PermissionsOTRSUser};
+        $Config{RebuildConfigCommand} = "su -c '$InstallDir/bin/ligero.Console.pl Maint::Config::Rebuild' -s /bin/bash "
+            . $Config{PermissionsLIGEROUser};
+        $Config{DeleteCacheCommand} = "su -c '$InstallDir/bin/ligero.Console.pl Maint::Cache::Delete' -s /bin/bash "
+            . $Config{PermissionsLIGEROUser};
     }
 
 }
 else {
-    $Config{RebuildConfigCommand} = "sudo perl $InstallDir/bin/otrs.RebuildConfig.pl";
-    $Config{DeleteCacheCommand}   = "sudo perl $InstallDir/bin/otrs.DeleteCache.pl";
+    $Config{RebuildConfigCommand} = "sudo perl $InstallDir/bin/ligero.RebuildConfig.pl";
+    $Config{DeleteCacheCommand}   = "sudo perl $InstallDir/bin/ligero.DeleteCache.pl";
 }
 
 my $SystemName = $InstallDir;
@@ -143,8 +143,8 @@ open my $File, $InstallDir . '/Kernel/Config.pm.dist' or die "Couldn't open $!";
 my $ConfigStr = join( "", <$File> );
 close $File;
 
-$ConfigStr =~ s{/opt/otrs}{$InstallDir}xmsg;
-$ConfigStr =~ s{('otrs'|'some-pass')}{'$DatabaseSystemName'}xmsg;
+$ConfigStr =~ s{/opt/ligero}{$InstallDir}xmsg;
+$ConfigStr =~ s{('ligero'|'some-pass')}{'$DatabaseSystemName'}xmsg;
 
 # inject some more data
 my $ConfigInjectStr = <<"EOD";
@@ -159,7 +159,7 @@ my $ConfigInjectStr = <<"EOD";
     \$Self->{'CheckMXRecord'}       = 0;
     \$Self->{'Organization'}        = '';
     \$Self->{'LogModule'}           = 'Kernel::System::Log::File';
-    \$Self->{'LogModule::LogFile'}  = '$Config{EnvironmentRoot}$SystemName/var/log/otrs.log';
+    \$Self->{'LogModule::LogFile'}  = '$Config{EnvironmentRoot}$SystemName/var/log/ligero.log';
     \$Self->{'FQDN'}                = 'localhost';
     \$Self->{'DefaultLanguage'}     = 'de';
     \$Self->{'DefaultCharset'}      = 'utf-8';
@@ -213,12 +213,12 @@ my $ApacheConfigStr = join( "", <$File> );
 close $File;
 
 $ApacheConfigStr
-    =~ s{Perlrequire \s+ /opt/otrs/scripts/apache2-perl-startup\.pl}{Perlrequire $ApacheModPerlFile}xms;
-$ApacheConfigStr =~ s{/opt/otrs}{$InstallDir}xmsg;
-$ApacheConfigStr =~ s{/otrs/}{/$SystemName/}xmsg;
-$ApacheConfigStr =~ s{/otrs-web/}{/$SystemName-web/}xmsg;
+    =~ s{Perlrequire \s+ /opt/ligero/scripts/apache2-perl-startup\.pl}{Perlrequire $ApacheModPerlFile}xms;
+$ApacheConfigStr =~ s{/opt/ligero}{$InstallDir}xmsg;
+$ApacheConfigStr =~ s{/ligero/}{/$SystemName/}xmsg;
+$ApacheConfigStr =~ s{/ligero-web/}{/$SystemName-web/}xmsg;
 $ApacheConfigStr =~ s{<IfModule \s* mod_perl.c>}{<IfModule mod_perlOFF.c>}xmsg;
-$ApacheConfigStr =~ s{<Location \s+ /otrs>}{<Location /$SystemName>}xms;
+$ApacheConfigStr =~ s{<Location \s+ /ligero>}{<Location /$SystemName>}xms;
 
 ## no critic
 open( $MyOutFile, '>' . $ApacheConfigFile ) or die "Couldn't open $!";
@@ -234,7 +234,7 @@ my $ApacheModPerlConfigStr = join( "", <$File> );
 close $File;
 
 # set correct path
-$ApacheModPerlConfigStr =~ s{/opt/otrs}{$InstallDir}xmsg;
+$ApacheModPerlConfigStr =~ s{/opt/ligero}{$InstallDir}xmsg;
 
 # enable lines for MySQL
 $ApacheModPerlConfigStr =~ s{^#(use DBD::mysql \(\);)$}{$1}msg;
@@ -267,13 +267,13 @@ $DBH->do(
 );
 $DBH->do('FLUSH PRIVILEGES');
 
-# copy the InstallTestsystemDatabase.pl script in otrs/bin folder, execute it, and delete it
+# copy the InstallTestsystemDatabase.pl script in ligero/bin folder, execute it, and delete it
 system("cp $Config{ModuleToolsRoot}InstallTestsystemDatabase.pl $InstallDir/bin/");
 system("perl $InstallDir/bin/InstallTestsystemDatabase.pl $InstallDir");
 system("rm $InstallDir/bin/InstallTestsystemDatabase.pl");
 
 # make sure we've got the correct rights set (e.g. in case you've downloaded the files as root)
-system("sudo chown -R $Config{PermissionsOTRSUser}:$Config{PermissionsOTRSGroup} $InstallDir");
+system("sudo chown -R $Config{PermissionsLIGEROUser}:$Config{PermissionsLIGEROGroup} $InstallDir");
 
 # link Fred
 print STDERR "--- Linking Fred...\n";
@@ -301,14 +301,14 @@ print STDERR "############################################\n";
 # setting permissions
 print STDERR "--- Setting permissions...\n";
 print STDERR "############################################\n";
-if ( $OTRSMajorVersion >= 5 ) {
+if ( $LIGEROMajorVersion >= 5 ) {
     system(
-        "sudo perl $InstallDir/bin/otrs.SetPermissions.pl -admin-group=$Config{PermissionAdminGroup} --otrs-user=$Config{PermissionsOTRSUser} --web-group=$Config{PermissionsWebGroup} $InstallDir"
+        "sudo perl $InstallDir/bin/ligero.SetPermissions.pl -admin-group=$Config{PermissionAdminGroup} --ligero-user=$Config{PermissionsLIGEROUser} --web-group=$Config{PermissionsWebGroup} $InstallDir"
     );
 }
 else {
     system(
-        "sudo perl $InstallDir/bin/otrs.SetPermissions.pl --otrs-user=$Config{PermissionsOTRSUser} --web-user=$Config{PermissionsWebUser} --otrs-group=$Config{PermissionsOTRSGroup} --web-group=$Config{PermissionsWebGroup} --not-root $InstallDir"
+        "sudo perl $InstallDir/bin/ligero.SetPermissions.pl --ligero-user=$Config{PermissionsLIGEROUser} --web-user=$Config{PermissionsWebUser} --ligero-group=$Config{PermissionsLIGEROGroup} --web-group=$Config{PermissionsWebGroup} --not-root $InstallDir"
     );
 }
 print STDERR "############################################\n";
@@ -336,14 +336,14 @@ system("rm $InstallDir/bin/FillTestsystem.pl");
 # setting permissions
 print STDERR "--- Setting permissions again (just to be sure)...\n";
 print STDERR "############################################\n";
-if ( $OTRSMajorVersion >= 5 ) {
+if ( $LIGEROMajorVersion >= 5 ) {
     system(
-        "sudo perl $InstallDir/bin/otrs.SetPermissions.pl -admin-group=$Config{PermissionAdminGroup} --otrs-user=$Config{PermissionsOTRSUser} --web-group=$Config{PermissionsWebGroup} $InstallDir"
+        "sudo perl $InstallDir/bin/ligero.SetPermissions.pl -admin-group=$Config{PermissionAdminGroup} --ligero-user=$Config{PermissionsLIGEROUser} --web-group=$Config{PermissionsWebGroup} $InstallDir"
     );
 }
 else {
     system(
-        "sudo perl $InstallDir/bin/otrs.SetPermissions.pl --otrs-user=$Config{PermissionsOTRSUser} --web-user=$Config{PermissionsWebUser} --otrs-group=$Config{PermissionsOTRSGroup} --web-group=$Config{PermissionsWebGroup} --not-root $InstallDir"
+        "sudo perl $InstallDir/bin/ligero.SetPermissions.pl --ligero-user=$Config{PermissionsLIGEROUser} --web-user=$Config{PermissionsWebUser} --ligero-group=$Config{PermissionsLIGEROGroup} --web-group=$Config{PermissionsWebGroup} --not-root $InstallDir"
     );
 }
 print STDERR "############################################\n";
@@ -357,7 +357,7 @@ sub Usage {
 $Message
 
 USAGE:
-    $0 -p /ws/otrs32-devel -f /devel/Fred_3_1
+    $0 -p /ws/ligero32-devel -f /devel/Fred_3_1
 HELPSTR
     return;
 }

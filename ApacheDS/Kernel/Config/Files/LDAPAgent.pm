@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -28,8 +28,8 @@ use vars (qw($Self));
     $Self->{'AuthModule::LDAP::UID1'}    = 'uid';
 
     # Check if the user is allowed to auth in a posixGroup
-    # (e. g. user needs to be in a group xyz to use otrs)
-    #  $Self->{'AuthModule::LDAP::GroupDN'} = 'cn=otrsallow,ou=posixGroups,dc=example,dc=com';
+    # (e. g. user needs to be in a group xyz to use ligero)
+    #  $Self->{'AuthModule::LDAP::GroupDN'} = 'cn=ligeroallow,ou=posixGroups,dc=example,dc=com';
     #    $Self->{'AuthModule::LDAP::AccessAttr'} = 'memberUid';
     # for ldap posixGroups objectclass (just uid)
     #    $Self->{'AuthModule::LDAP::UserAttr'} = 'UID';
@@ -58,7 +58,7 @@ use vars (qw($Self));
     # is not in use.
     #    $Self->{'AuthModule::LDAP::UserLowerCase'} = 0;
 
-    # In case you need to use OTRS in iso-charset, you can define this
+    # In case you need to use LIGERO in iso-charset, you can define this
     # by using this option (converts utf-8 data from LDAP to iso).
     #    $Self->{'AuthModule::LDAP::Charset'} = 'iso-8859-1';
 
@@ -106,7 +106,7 @@ use vars (qw($Self));
         UserEmail     => 'mail',
     };
 
-    # In case you need to use OTRS in iso-charset, you can define this
+    # In case you need to use LIGERO in iso-charset, you can define this
     # by using this option (converts utf-8 data from LDAP to iso).
     #    $Self->{'AuthSyncModule::LDAP::Charset'} = 'iso-8859-1';
 
@@ -138,15 +138,15 @@ use vars (qw($Self));
 
     # AuthSyncModule::LDAP::UserSyncGroupsDefinition
     # (If "LDAP" was selected for AuthModule and you want to sync LDAP
-    # groups to otrs groups, define the following.)
+    # groups to ligero groups, define the following.)
     $Self->{'AuthSyncModule::LDAP::UserSyncGroupsDefinition1'} = {
         'cn=Sith Lords,ou=orders,ou=groups,o=force' => {    # LDAP  group.
-            'admin' => {                                    # OTRS group.
+            'admin' => {                                    # LIGERO group.
                 rw => 1,                                    # Effective permission.
                 ro => 1,                                    # Effective permission.
             },
 
-            # 'sithlords' => {      # This group does not exist in OTRS you need to create it in order to use it.
+            # 'sithlords' => {      # This group does not exist in LIGERO you need to create it in order to use it.
             #     rw => 1,
             #     ro => 1,
             # },
@@ -188,11 +188,11 @@ use vars (qw($Self));
 
     # AuthSyncModule::LDAP::UserSyncRolesDefinition
     # (If "LDAP" was selected for AuthModule and you want to sync LDAP
-    # groups to otrs roles, define the following.)
+    # groups to ligero roles, define the following.)
     $Self->{'AuthSyncModule::LDAP::UserSyncRolesDefinition1'} = {
         'cn=Sith Lords,ou=orders,ou=groups,o=force' => {    # LDAP  group.
-            'sithlordsrole' => 1,    # OTRS role. (This role does not exists in OTRS, add it to get the results)
-            'ldaprole'      => 0,    # OTRS role. (This role does not exists in OTRS, add it to get the results)
+            'sithlordsrole' => 1,    # LIGERO role. (This role does not exists in LIGERO, add it to get the results)
+            'ldaprole'      => 0,    # LIGERO role. (This role does not exists in LIGERO, add it to get the results)
         },
         'cn=Night Sisters,ou=orders,ou=groups,o=force' => {
 
@@ -210,13 +210,13 @@ use vars (qw($Self));
 
     # AuthSyncModule::LDAP::UserSyncAttributeGroupsDefinition
     # (If "LDAP" was selected for AuthModule and you want to sync LDAP
-    # attributes to otrs groups, define the following.)
+    # attributes to ligero groups, define the following.)
     #    $Self->{'AuthSyncModule::LDAP::UserSyncAttributeGroupsDefinition'} = {
     #        # ldap attribute
     #        'LDAPAttribute' => {
     #            # ldap attribute value
     #            'LDAPAttributeValue1' => {
-    #                # otrs group
+    #                # ligero group
     #                'admin' => {
     #                    # permission
     #                    rw => 1,
@@ -240,13 +240,13 @@ use vars (qw($Self));
 
     # AuthSyncModule::LDAP::UserSyncAttributeRolesDefinition
     # (If "LDAP" was selected for AuthModule and you want to sync LDAP
-    # attributes to otrs roles, define the following.)
+    # attributes to ligero roles, define the following.)
     #    $Self->{'AuthSyncModule::LDAP::UserSyncAttributeRolesDefinition'} = {
     #        # ldap attribute
     #        'LDAPAttribute' => {
     #            # ldap attribute value
     #            'LDAPAttributeValue1' => {
-    #                # otrs role
+    #                # ligero role
     #                'role1' => 1,
     #                'role2' => 1,
     #            },

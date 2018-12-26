@@ -1,4 +1,4 @@
-# Setup and configure a basic LDAP server to use with OTRS
+# Setup and configure a basic LDAP server to use with LIGERO
 
 1. Download and Install Apache Directory Studio
 
@@ -51,5 +51,5 @@
     2. Import
     3. Choose the ForceUsers.ldif file
 
-7. Prepare OTRS
+7. Prepare LIGERO
     1. Copy LDAPAgent.pm and LDAPCustomer.pm to Kernel/Config/Files/*

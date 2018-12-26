@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -20,7 +20,7 @@
 
 =head1 NAME
 
-CheckChangedFiles.pl - script for get changed file between different releases of OTRS
+CheckChangedFiles.pl - script for get changed file between different releases of LIGERO
 
 =head1 SYNOPSIS
 
@@ -42,7 +42,7 @@ CheckChangedFiles.pl [ -h | -r | -m /path/to/module ] /path/to/base/version /pat
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::PerlCritic)
+## nofilter(TidyAll::Plugin::LIGERO::Perl::PerlCritic)
 
 use Getopt::Long;
 use Pod::Usage;
@@ -136,7 +136,7 @@ if ($ModuleVersionFile2MD5) {
 Returns a HASHREF with file names as key and its MD5 hex digest as value.
 It strips out the root directory from the file name.
 
-my $FileName2MD5 = FindFilesOfVersion( '/ws/otrs-head' );
+my $FileName2MD5 = FindFilesOfVersion( '/ws/ligero-head' );
 
 results will look like:
 $FileName2MD5 = {
@@ -166,7 +166,7 @@ sub FindFilesOfVersion {
         # get file name without root path and possible tailing '/'
         my ($PackageName) = $FileName =~ m{\A $VersionDirectory (?: / )? (.*) \z}xms;
 
-        # consider customized files for OTRS 2.4 in Kernel/Custom/
+        # consider customized files for LIGERO 2.4 in Kernel/Custom/
         $PackageName =~ s{ Kernel/Custom/ }{}xms;
 
         # check for reduceded file checking

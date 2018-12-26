@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -42,7 +42,7 @@ my @GitIgnore = (
     #    '/path/to/ignore/',
 );
 
-my $CodePolicyRegisterCommand = '/path/to/your/OTRSCodePolicy/scripts/install-git-hooks.pl';
+my $CodePolicyRegisterCommand = '/path/to/your/LIGEROCodePolicy/scripts/install-git-hooks.pl';
 
 # ----------------------------------------------------------------------
 
@@ -62,7 +62,7 @@ if ($All) {
     push @DevelDirectories, @AditionalDevelDirectories;
 }
 
-# get a list of all git directories and OTRSCodePolicy directories
+# get a list of all git directories and LIGEROCodePolicy directories
 my @GitDirectoryList;
 my @CodePolicyDirectoryList;
 for my $DevelDirectory (@DevelDirectories) {
@@ -145,7 +145,7 @@ for my $Directory ( sort @GitDirsClean ) {
     }
 }
 
-# register OTRS code policy
+# register LIGERO code policy
 DIRECTORY:
 for my $Directory (@CodePolicyDirectoryList) {
 
@@ -245,7 +245,7 @@ sub GitDirectoriesList {
         # look, if an sopm exists
         my @SOPMs = glob "$Directory/*.sopm";
 
-        next DIRECTORY if $Directory !~ m{ \/otrs }xms && !@SOPMs;
+        next DIRECTORY if $Directory !~ m{ \/ligero }xms && !@SOPMs;
 
         push @{ $Param{CodePolicyDirectoryList} }, $Directory;
     }

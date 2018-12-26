@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -21,7 +21,7 @@
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+## nofilter(TidyAll::Plugin::LIGERO::Perl::Require)
 
 use File::Find;
 use Cwd;
@@ -96,9 +96,9 @@ sub Usage {
 $Message
 
 USAGE:
-    $0 install <source-module-path> <otrs-framework-root>
+    $0 install <source-module-path> <ligero-framework-root>
 or
-    $0 uninstall <source-module-path> <otrs-framework-root>
+    $0 uninstall <source-module-path> <ligero-framework-root>
 End-of-Here
     return;
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -20,17 +20,17 @@
 
 =head1 NAME
 
-link.pl - script for linking OTRS modules into framework root
+link.pl - script for linking LIGERO modules into framework root
 
 =head1 SYNOPSIS
 
 link.pl -h
 
-link.pl <source-module-folder> <otrs-folder>
+link.pl <source-module-folder> <ligero-folder>
 
 =head1 DESCRIPTION
 
-This script installs a given OTRS module into the OTRS framework by creating
+This script installs a given LIGERO module into the LIGERO framework by creating
 appropriate links.
 Beware that code from the .sopm file is not executed.
 
@@ -38,7 +38,7 @@ Existing files are backupped by adding the extension '.old'.
 So this script can be used for an already installed module, when linking
 files from CVS checkout directory.
 
-Please send any questions, suggestions & complaints to <ot@otrs.com>
+Please send any questions, suggestions & complaints to <ot@ligero.com>
 
 =head1 TODO
 

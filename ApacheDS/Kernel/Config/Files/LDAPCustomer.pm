@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -27,8 +27,8 @@ use vars (qw($Self));
     $Self->{'Customer::AuthModule::LDAP::UID1'}    = 'uid';
 
     # Check if the user is allowed to auth in a posixGroup
-    # (e. g. user needs to be in a group xyz to use otrs)
-    #    $Self->{'Customer::AuthModule::LDAP::GroupDN'} = 'cn=otrsallow,ou=posixGroups,dc=example,dc=com';
+    # (e. g. user needs to be in a group xyz to use ligero)
+    #    $Self->{'Customer::AuthModule::LDAP::GroupDN'} = 'cn=ligeroallow,ou=posixGroups,dc=example,dc=com';
     #    $Self->{'Customer::AuthModule::LDAP::AccessAttr'} = 'memberUid';
     # for ldap posixGroups objectclass (just uid)
     #    $Self->{'Customer::AuthModule::LDAP::UserAttr'} = 'UID';

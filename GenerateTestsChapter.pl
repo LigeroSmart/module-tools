@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -34,7 +34,7 @@ if ($@) {
     exit 1;
 }
 
-use OTRS::XML::Simple;
+use LIGERO::XML::Simple;
 use Getopt::Std;
 
 use base qw(Docbook::Base);
@@ -73,7 +73,7 @@ $Options{UnitTestDirectory} = $Opts{m} . '/scripts/test';
 $Options{OutputLocation}    = $Opts{m} . '/doc/' . $Options{Language} . '/' . $OutputFile;
 
 # create parser in / out object
-my $XMLObject = new OTRS::XML::Simple;    ##no critic
+my $XMLObject = new LIGERO::XML::Simple;    ##no critic
 
 # output
 print "+----------------------------------------------------------------------------+\n";
@@ -107,7 +107,7 @@ sub _Help {
     my %Param = @_;
 
     print "$Script - Generate module tests chapter\n";
-    print "Copyright (C) 2001-2017 OTRS AG, http://otrs.com/\n";
+    print "Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/\n";
     print "usage: $Script -m <path to module> -l <language> (optional)"
         . " -o <Output filename> (optional)\n";
 
@@ -182,7 +182,7 @@ XML
 XML
 
     if ( !@{ $Param{FileList} } ) {
-        $Chapter .= 'shell> perl bin/otrs.Console.pl Dev::UnitTest::Run - - test'
+        $Chapter .= 'shell> perl bin/ligero.Console.pl Dev::UnitTest::Run - - test'
     }
 
     for my $File ( sort { "\L$a" cmp "\L$b" } @{ $Param{FileList} } ) {
@@ -190,7 +190,7 @@ XML
         $File =~ s{./scripts/test/}{}msxi;
         $File =~ s{\.t\z}{}msxi;
 
-        $Chapter .= "shell> perl bin/otrs.Console.pl Dev::UnitTest::Run --test $File\n";
+        $Chapter .= "shell> perl bin/ligero.Console.pl Dev::UnitTest::Run --test $File\n";
 
         # output
         print "Added file: $File...done\n";
@@ -207,7 +207,7 @@ XML
         </para>
         <para>
             <screen>
-shell> perl bin/otrs.Console.pl Dev::UnitTest::Run
+shell> perl bin/ligero.Console.pl Dev::UnitTest::Run
             </screen>
         </para>
     </section>

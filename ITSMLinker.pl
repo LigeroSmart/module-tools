@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -35,17 +35,17 @@ if ( $Opts{'h'} ) {
 
     print <<'EOF';
 
-ITSMLinker.pl -  to link / unlink all ITSM modules into a OTRS system
-Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+ITSMLinker.pl -  to link / unlink all ITSM modules into a LIGERO system
+Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 
 Usage:
-    ITSMLinker.pl -a <install|uninstall> [ -v <ITSM branch version number> ] [ -t <Module-Tools-Path> ] -m <Module-Path> -o <OTRS-path> [ -d (also executes DatabaseInstall and CodeInstall) ]
+    ITSMLinker.pl -a <install|uninstall> [ -v <ITSM branch version number> ] [ -t <Module-Tools-Path> ] -m <Module-Path> -o <LIGERO-path> [ -d (also executes DatabaseInstall and CodeInstall) ]
 
 Examples:
-    ITSMLinker.pl -a install -v 3.3 -m /devel -o /devel/otrs33-itsm
-    ITSMLinker.pl -a install -v 4.0 -m /devel -o /devel/otrs40-itsm -d
-    ITSMLinker.pl -a install -v 4.0 -t /devel/other/module-tools -m /devel -o /devel/otrs40-itsm -d
-    ITSMLinker.pl -a install -m /devel -o /devel/otrs40-itsm -d
+    ITSMLinker.pl -a install -v 3.3 -m /devel -o /devel/ligero33-itsm
+    ITSMLinker.pl -a install -v 4.0 -m /devel -o /devel/ligero40-itsm -d
+    ITSMLinker.pl -a install -v 4.0 -t /devel/other/module-tools -m /devel -o /devel/ligero40-itsm -d
+    ITSMLinker.pl -a install -m /devel -o /devel/ligero40-itsm -d
 
 EOF
 

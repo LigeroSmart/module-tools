@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -34,7 +34,7 @@ if ($@) {
     exit 1;
 }
 
-use OTRS::XML::Simple;
+use LIGERO::XML::Simple;
 use Getopt::Std;
 
 use base qw(Docbook::Base);
@@ -86,7 +86,7 @@ print "| To:     $Options{OutputLocation}\n";
 print "+----------------------------------------------------------------------------+\n";
 
 #  create parser in / out object
-my $XMLObject = OTRS::XML::Simple->new();
+my $XMLObject = LIGERO::XML::Simple->new();
 
 # get all config settings from all files
 my %ConfigSettings = $Self->_GetConfigSettings(
@@ -114,7 +114,7 @@ sub _Help {
     my ( $Self, %Param ) = @_;
 
     print "$Script - Generate module configuration chapter\n";
-    print "Copyright (C) 2001-2017 OTRS AG, http://otrs.com/\n";
+    print "Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/\n";
     print "usage: $Script -m <path to module> -l <language> (optional)"
         . " -o <Output filename> (optional) -s <sort by name 1/0> (optional, enabled by default)\n";
     return 1;
@@ -149,7 +149,7 @@ sub _GetLanguage {
             @ISA = ("Kernel::Language::$Module");
             push @INC, "$Path";
             eval {
-                require $Module;    ## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+                require $Module;    ## nofilter(TidyAll::Plugin::LIGERO::Perl::Require)
 
             };
             $Self->Data();
@@ -220,7 +220,7 @@ sub _ParseConfigFile {
         return;
     }
 
-    my $XMLObject = OTRS::XML::Simple->new();
+    my $XMLObject = LIGERO::XML::Simple->new();
 
     # convert XML file to perl structure
     my $ParsedSettings;

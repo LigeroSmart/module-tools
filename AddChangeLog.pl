@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -155,7 +155,7 @@ sub UpdateChanges {
 
     ## no critic
     open my $OutFile, '>',
-        '.git/OTRSCommitTemplate.msg' || die "Couldn't open .git/OTRSCommitTemplate.msg: $!";
+        '.git/LIGEROCommitTemplate.msg' || die "Couldn't open .git/LIGEROCommitTemplate.msg: $!";
     ## use critic
     binmode $OutFile;
     my $PRText = '';
@@ -177,7 +177,7 @@ sub GetBugSummary {
 
     # get bug description from bug tracker
     # if bug does not exist we automatically get an error message and the script dies
-    my $Proxy  = XMLRPC::Lite->proxy('https://bugs.otrs.org/xmlrpc.cgi');
+    my $Proxy  = XMLRPC::Lite->proxy('https://bugs.ligero.org/xmlrpc.cgi');
     my $Result = $Proxy->call(
         'Bug.get',
         {
@@ -218,18 +218,18 @@ sub FormatChangesLine {
 
 # formatting is different for markdown files; below first 'regular', second 'markdown'.
 # - 2013-03-02 Fixed bug#9214 - IE10: impossible to open links from rich text articles.
-# - 2013-03-02 Fixed bug#[9214](http://bugs.otrs.org/show_bug.cgi?id=9214) - IE10: impossible to open links from rich text articles.
+# - 2013-03-02 Fixed bug#[9214](http://bugs.ligero.org/show_bug.cgi?id=9214) - IE10: impossible to open links from rich text articles.
 
     my $PRText = '';
     $PRText = "(PR#$PullRequest) " if $PullRequest;
 
-    # format for CHANGES (OTRS 3.1.x and earlier) is different from CHANGES.md
+    # format for CHANGES (LIGERO 3.1.x and earlier) is different from CHANGES.md
     my $Line;
     if ( $Bug && $ChangesFile !~ m{CHANGES .* \.md}msx ) {
         $Line = " - $Date Fixed bug#$Bug$PRText - $Summary.\n";
     }
     elsif ($Bug) {
-        $Line = " - $Date Fixed bug#[$Bug](https://bugs.otrs.org/show_bug.cgi?id=$Bug)$PRText - $Summary.\n";
+        $Line = " - $Date Fixed bug#[$Bug](https://bugs.ligero.org/show_bug.cgi?id=$Bug)$PRText - $Summary.\n";
     }
     elsif ($Message) {
         $Line = " - $Date $PRText$Summary\n";

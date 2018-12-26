@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -46,7 +46,7 @@ if ( eval 'require Kernel::System::ObjectManager' ) {    ## no critic
 my %CommonObject = ();
 $CommonObject{ConfigObject} = Kernel::Config->new(%CommonObject);
 $CommonObject{EncodeObject} = Kernel::System::Encode->new(%CommonObject);
-$CommonObject{LogObject}  = Kernel::System::Log->new( %CommonObject, LogPrefix => 'OTRS-InstallTestsystemDatabase.pl' );
+$CommonObject{LogObject}  = Kernel::System::Log->new( %CommonObject, LogPrefix => 'LIGERO-InstallTestsystemDatabase.pl' );
 $CommonObject{TimeObject} = Kernel::System::Time->new(%CommonObject);
 $CommonObject{MainObject} = Kernel::System::Main->new(%CommonObject);
 $CommonObject{DBObject}   = Kernel::System::DB->new(%CommonObject);
@@ -59,7 +59,7 @@ my $InstallDir = $ARGV[0];
 
 # create database tables and insert initial values
 my @SQLPost;
-for my $SchemaFile (qw ( otrs-schema otrs-initial_insert )) {
+for my $SchemaFile (qw ( ligero-schema ligero-initial_insert )) {
 
     my $Path = "$InstallDir/scripts/database/";
 
@@ -80,7 +80,7 @@ for my $SchemaFile (qw ( otrs-schema otrs-initial_insert )) {
     );
 
     # if we parsed the schema, catch post instructions
-    if ( $SchemaFile eq 'otrs-schema' ) {
+    if ( $SchemaFile eq 'ligero-schema' ) {
         @SQLPost = $CommonObject{DBObject}->SQLProcessorPost();
     }
 

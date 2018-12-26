@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -64,7 +64,7 @@ if ( $Content =~ m{\A\#\d} ) {
 
     # format bug links
     $Section
-        =~ s{ (?:Fixed [ ])? bug\# \[( \d{4,6} )\]\(.*?\) }{Bug#[[http://bugs.otrs.org/show_bug.cgi?id=$1][$1]]}ismxg;
+        =~ s{ (?:Fixed [ ])? bug\# \[( \d{4,6} )\]\(.*?\) }{Bug#[[http://bugs.ligero.org/show_bug.cgi?id=$1][$1]]}ismxg;
 }
 
 # OLD STYLE
@@ -76,7 +76,7 @@ else {
 
     # format bug links
     $Section
-        =~ s{ Fixed [ ] bug\# ( \d{4,6} ) }{Bug#[[http://bugs.otrs.org/show_bug.cgi?id=$1][$1]]}ismxg;
+        =~ s{ Fixed [ ] bug\# ( \d{4,6} ) }{Bug#[[http://bugs.ligero.org/show_bug.cgi?id=$1][$1]]}ismxg;
 }
 
 # mask WikiWords

@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -21,9 +21,9 @@
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::PerlCritic)
+## nofilter(TidyAll::Plugin::LIGERO::Perl::PerlCritic)
 
-package OTRS::XML::Simple;
+package LIGERO::XML::Simple;
 
 eval { require XML::Simple };
 if ($@) {
@@ -157,7 +157,7 @@ if ( $Opts{o} ) {
 $Options{OutputLocation} = $Opts{m} . '/doc/' . $Language . '/' . $OutputFile;
 
 # create parser in / out object
-my $XMLObject = new OTRS::XML::Simple;
+my $XMLObject = new LIGERO::XML::Simple;
 
 # output
 print "+----------------------------------------------------------------------------+\n";
@@ -226,7 +226,7 @@ sub _Help {
 
     print "Config2Docbook.pl - Convert sysc config settings to Docbook"
         . " format\n";
-    print "Copyright (C) 2001-2017 OTRS AG, http://otrs.com/\n";
+    print "Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/\n";
     print "usage: Config2Docbook.pl -m <path to module> -l <language> (optional)"
         . " -o <Output filename> (optional) -s <sort by name 1/0> (optional)\n";
 }

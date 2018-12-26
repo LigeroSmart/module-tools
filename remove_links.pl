@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # --
-# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -29,7 +29,7 @@ if ( !-d $Dest ) {
 if ( !( -e $Dest . '/Kernel' && -e $Dest . '/Kernel/System' ) ) {
     print <<"WARNING";
 Can't find $Dest/Kernel and $Dest/Kernel/System, so I assume it's not a
-root directory of an OTRS instance. Remove links anyway? [y/N]
+root directory of an LIGERO instance. Remove links anyway? [y/N]
 WARNING
 
     chomp( my $Answer = <STDIN> );

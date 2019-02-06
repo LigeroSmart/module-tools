@@ -1,4 +1,6 @@
-# --
+# Modified version of the work: Copyright (C) 2019 Ligero, https://www.complemento.net.br/
+# based on the original work of:
+# Copyright (C) 2001-2018 OTRS AG, https://otrs.com/# --
 # Copyright (C) 2001-2017 LIGERO AG, http://ligero.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
